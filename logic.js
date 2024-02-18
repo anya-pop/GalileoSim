@@ -22,7 +22,8 @@ var render = Render.create({
 
 var ground = Bodies.rectangle(200, 200, 200, 60, { isStatic: true });
 Composite.add(engine.world, [ ground]);
-let boxA = Bodies.circle(200, 165, 35,  {
+
+let tomato = Bodies.circle(200, 165, 35,  {
   render: {
       sprite: {
           texture:
@@ -30,7 +31,9 @@ let boxA = Bodies.circle(200, 165, 35,  {
       }
   }
   });
-  Composite.add(engine.world, boxA);
+  Composite.add(engine.world, [tomato]);
+
+
 var floor = Bodies.rectangle(0, window.innerHeight, 10000, 100, { 
   render:{
 fillStyle: 'gray'
@@ -46,13 +49,26 @@ Composite.add(engine.world, [xAxis,  yAxis]);
 Engine.run(engine);
 
 Render.run(render);
-// create runner
 var runner = Runner.create();
 
 let btn = document.getElementById("btn");
 
 btn.onclick = function() {
 
-     Matter.Body.setVelocity( boxA, {x: 10, y: -20});
+     Matter.Body.setVelocity( tomato, {x: 15, y: 0});
+
+     setTimeout(function() {
+     let newTomato = Bodies.circle(200, 165, 35,  {
+        render: {
+            sprite: {
+                texture:
+                "images/tomato.svg"
+            }
+        }
+        });
+        Composite.add(engine.world, [newTomato]);
+        tomato = newTomato;
+    }, 1000);
+        
 
 };
