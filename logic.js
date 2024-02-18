@@ -13,17 +13,16 @@ var render = Render.create({
   engine: engine,
   options: {
     width: window.innerWidth,
-    height: window.innerHeight - 40,
+    height: window.innerHeight,
     wireframes: false,
     background: 'white'
   }
 });
 
 
-var bottomWall = Bodies.rectangle(0, window.innerHeight-35, (window.innerWidth)*2, 40, { isStatic: true});
-var ground = Bodies.rectangle(200, 610, 200, 60, { isStatic: true });
+var ground = Bodies.rectangle(200, 200, 200, 60, { isStatic: true });
 Composite.add(engine.world, [ ground]);
-let boxA = Bodies.rectangle(200, 200, 80, 80, {
+let boxA = Bodies.circle(200, 165, 35,  {
   render: {
       sprite: {
           texture:
@@ -32,10 +31,16 @@ let boxA = Bodies.rectangle(200, 200, 80, 80, {
   }
   });
   Composite.add(engine.world, boxA);
-
-Composite.add(engine.world, [bottomWall]);
-var xAxis = Bodies.rectangle(0, window.innerHeight-100, 10000, 50, { isStatic: true });
-var yAxis = Bodies.rectangle(0, 0, 50, 10000, { isStatic: true });
+var floor = Bodies.rectangle(0, window.innerHeight, 10000, 100, { 
+  render:{
+fillStyle: 'gray'
+  },
+  isStatic: true
+  
+});
+Composite.add(engine.world, [floor]);
+var xAxis = Bodies.rectangle(0, window.innerHeight, 10000, 10, { isStatic: true });
+var yAxis = Bodies.rectangle(100, 0, 10, 10000, { isStatic: true });
 Composite.add(engine.world, [xAxis,  yAxis]);
 
 Engine.run(engine);
@@ -48,6 +53,6 @@ let btn = document.getElementById("btn");
 
 btn.onclick = function() {
 
-     Matter.Body.setVelocity( boxA, {x: 20, y: -20});
+     Matter.Body.setVelocity( boxA, {x: 10, y: -20});
 
 };
