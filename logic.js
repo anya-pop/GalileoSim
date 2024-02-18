@@ -5,7 +5,6 @@ var Engine = Matter.Engine,
   Body = Matter.Body;
   Runner = Matter.Runner,
   Composite = Matter.Composite;
-  Events = Matter.Events;
 
 var engine = Engine.create();
 
@@ -37,7 +36,7 @@ let tomato = Bodies.circle(200, 165, 35,  {
 
 var floor = Bodies.rectangle(0, window.innerHeight, 10000, 200, { 
   render:{
-        fillStyle: 'gray'
+fillStyle: 'gray'
   },
   isStatic: true
   
@@ -60,21 +59,6 @@ Engine.run(engine);
 
 Render.run(render);
 var runner = Runner.create();
-
-function getPosition(body) {
-        return {
-            x: body.position.x,
-            y: body.position.y
-        };
-}
-function monitorPosition() {
-    var tomatoYPosition = tomato.position.y;
-
-    if (tomatoYPosition >= 100+tomato.circleRadius) {
-        Composite.remove(engine.world, [tomato]);
-    }
-}
-
 
 let btn = document.getElementById("btn");
 
