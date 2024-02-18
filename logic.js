@@ -10,20 +10,19 @@ var render = Render.create({
   element: document.body,
   engine: engine,
   options: {
-    width: 800,
-    height: 400,
-    wireframes: false
+    width: window.innerWidth,
+    height: window.innerHeight - 40,
+    wireframes: false,
+    background: 'white'
   }
 });
 
-var topWall = Bodies.rectangle(400, 50, 720, 20, { isStatic: true });
-var leftWall = Bodies.rectangle(50, 210, 20, 300, { isStatic: true });
-var rightWall = Bodies.rectangle(750, 210, 20, 300, { isStatic: true });
-var bottomWall = Bodies.rectangle(400, 350, 720, 20, { isStatic: true });
+
+var bottomWall = Bodies.rectangle(0, window.innerHeight-35, (window.innerWidth)*2, 40, { isStatic: true});
 
 var box = Bodies.rectangle(90, 120, 40, 40);
 
-World.add(engine.world, [topWall, leftWall, rightWall, bottomWall, box]);
+World.add(engine.world, [bottomWall, box]);
 
 Engine.run(engine);
 
